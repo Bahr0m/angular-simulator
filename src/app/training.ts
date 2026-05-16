@@ -14,8 +14,8 @@ interface IPerson extends IUser {
   height?: number;
 }
 
-let isStatus: 'loading' | 'success' | 'error' = 'loading';
-let textFormat: 'uppercase' | 'lowercase' | 'capitalize' = 'capitalize';
+let Status: 'loading' | 'success' | 'error' ;
+let textFormat: 'uppercase' | 'lowercase' | 'capitalize';
 const users: IUser[] = [
   {
     name: 'John',
