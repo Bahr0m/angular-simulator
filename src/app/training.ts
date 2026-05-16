@@ -13,9 +13,12 @@ interface IPerson extends IUser {
   weight?: number;
   height?: number;
 }
+type formatTypes = 'UPPERCASE' | 'LOWERCASE' | 'CAPITALIZE';
+type statusTypes = 'LOADING' | 'SUCCESS' | 'ERROR';
 
-let Status: 'loading' | 'success' | 'error' ;
-let textFormat: 'uppercase' | 'lowercase' | 'capitalize';
+let Status: statusTypes;
+let textFormat: formatTypes = 'UPPERCASE';
+
 const users: IUser[] = [
   {
     name: 'John',
@@ -58,8 +61,17 @@ function sum(a: number, b: number): number {
   return a + b;
 }
 
-function showCityTemp(city: string, temp: number): void {
-  console.log(`Сейчас в ${city} температура - ${temp} градусов по Цельсию`);
+function formatText(text: string, format: formatTypes): string {
+  switch (format) {
+    case 'UPPERCASE':
+      return text.toUpperCase();
+    case 'LOWERCASE':
+      return text.toLowerCase();
+    case 'CAPITALIZE':
+      return text[0].toUpperCase() + text.slice(1).toLowerCase();
+    default:
+      return text;
+  }
 }
 
 function removeChar(word: string, char: string): string {
@@ -67,5 +79,5 @@ function removeChar(word: string, char: string): string {
 }
 
 console.log(sum(5, 10));
-showCityTemp('New York', 25);
+console.log(formatText('hello world', textFormat));
 console.log(removeChar('Hello World', 'o'));
