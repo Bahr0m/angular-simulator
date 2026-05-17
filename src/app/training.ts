@@ -1,3 +1,4 @@
+export {};
 interface IUser {
   name: string;
   surname: string;
@@ -16,7 +17,7 @@ interface IPerson extends IUser {
 type formatTypes = 'uppercase' | 'lowercase' | 'capitalize';
 type statusTypes = 'loading' | 'success' | 'error';
 
-let Status: statusTypes;
+let status: statusTypes;
 let textFormat: formatTypes = 'uppercase';
 
 const users: IUser[] = [
