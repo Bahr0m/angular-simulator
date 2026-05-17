@@ -13,11 +13,11 @@ interface IPerson extends IUser {
   weight?: number;
   height?: number;
 }
-type formatTypes = 'UPPERCASE' | 'LOWERCASE' | 'CAPITALIZE';
-type statusTypes = 'LOADING' | 'SUCCESS' | 'ERROR';
+type formatTypes = 'uppercase' | 'lowercase' | 'capitalize';
+type statusTypes = 'loading' | 'success' | 'error';
 
 let Status: statusTypes;
-let textFormat: formatTypes = 'UPPERCASE';
+let textFormat: formatTypes = 'uppercase';
 
 const users: IUser[] = [
   {
@@ -63,11 +63,11 @@ function sum(a: number, b: number): number {
 
 function formatText(text: string, format: formatTypes): string {
   switch (format) {
-    case 'UPPERCASE':
+    case 'uppercase':
       return text.toUpperCase();
-    case 'LOWERCASE':
+    case 'lowercase':
       return text.toLowerCase();
-    case 'CAPITALIZE':
+    case 'capitalize':
       return text[0].toUpperCase() + text.slice(1).toLowerCase();
     default:
       return text;
