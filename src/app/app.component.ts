@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Colors } from '../enums/Color';
+import './collection';
 import { SelectComponent } from './common_ui/select/select.component';
 @Component({
   selector: 'app-root',
@@ -49,4 +51,19 @@ export class AppComponent {
       type: 'select',
     },
   ];
+
+  //2
+  isMainColor(color: string): boolean {
+    return color === Colors.Red || color === Colors.Green || color === Colors.Blue;
+  }
+
+  //3
+  constructor() {
+    let now: string = new Date().toLocaleDateString();
+    localStorage.setItem('lastDate', now);
+
+    //4
+    let time: number = +(localStorage.getItem('time') || 0);
+    localStorage.setItem('time', (++time).toString());
+  }
 }
