@@ -58,12 +58,19 @@ export class AppComponent {
   }
 
   //3
-  constructor() {
-    let now: string = new Date().toLocaleDateString();
+  lastTime(){
+    let now:string = new Date().toLocaleDateString();
     localStorage.setItem('lastDate', now);
+  }
 
-    //4
+  //4
+  setTime(){
     let time: number = +(localStorage.getItem('time') || 0);
     localStorage.setItem('time', (++time).toString());
+  }
+
+  constructor() {
+    this.lastTime()
+    this.setTime()
   }
 }
