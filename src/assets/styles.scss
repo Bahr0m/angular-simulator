@@ -1,13 +1,18 @@
 @use './_fonts';
 @use './_normalize';
+@use './button';
 
 * {
   font-family: 'Nunito Sans';
+  box-sizing: border-box;
+  margin: 0;
 }
 :root {
   --primary-color: #000;
+  --secondary-color:#1A3E3E;
   --white-color: #fff;
-  --secondary-color: #f2be22;
+  --yellow-color: #f2be22;
+  --grey-color:#F3F5F4;
 }
 
 .container {

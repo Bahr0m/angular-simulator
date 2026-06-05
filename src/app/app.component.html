@@ -20,18 +20,113 @@
     <h1 class="title">Насладись прогулкой в горах <br />с командой единомышленников</h1>
     <div class="acttions_wrapper">
       <div class="actions">
-        <div class="flex g-24 justify-start">
-          @for (select of selects; track select.placeholder) {
-            <custom-select
-              [options]="select.options"
-              [placeholder]="select.placeholder"
-              [desc]="select.desc"
-              [type]="select.type"
-            ></custom-select>
-          }
+        <div class="field">
+          <select
+            id="location"
+            class="field__control field__control__select"
+            [(ngModel)]="selectedLocation"
+          >
+            <option value="" disabled selected hidden>Локация для тура</option>
+            @for (o of locations; track o.value) {
+              <option [value]="o.value">{{ o.label }}</option>
+            }
+          </select>
+          <label for="location" class="field__hint">выберите из списка</label>
         </div>
-        <button class="search_btn">Найти программу</button>
+        <div class="field">
+          <input
+            id="date"
+            class="field__control field__control__date"
+            type="text"
+            [(ngModel)]="selectedDate"
+            placeholder="Дата похода"
+            onfocus="this.type = 'date'"
+            onblur="if (!this.value) this.type = 'text';"
+          />
+          <label for="date" class="field__hint">укажите дату</label>
+        </div>
+        <div class="field">
+          <select
+            id="participants"
+            class="field__control field__control__select"
+            [(ngModel)]="selectedParticipants"
+          >
+            <option value="" disabled selected hidden>Участники</option>
+            @for (o of participants; track o.value) {
+              <option [value]="o.value">{{ o.label }}</option>
+            }
+          </select>
+          <label for="participants" class="field__hint">выберите из списка</label>
+        </div>
+        <button class="primary_btn">Найти программу</button>
       </div>
+    </div>
+  </div>
+</section>
+<section class="our_trip">
+  <div class="container our_trip_container">
+    <div class="our_trip_views">
+      <img class="our_trip_views_back" src="/image/mountain.png" alt="mountain" />
+      <div class="our_trip_views_video">
+        <img src="/image/nature.png" alt="nature" />
+        <div class="play_btn">
+          <svg
+            width="13"
+            height="15"
+            viewBox="0 0 14 16"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M2.74267 0.241409C2.46389 0.0821678 2.14819 -0.00107431 1.82714 1.04681e-05C1.50609 0.00109524 1.19096 0.0864689 0.913263 0.24759C0.63557 0.408711 0.405057 0.63993 0.244785 0.918114C0.0845135 1.1963 0.000103536 1.51169 0 1.83274V13.3406C0.000103536 13.6616 0.0845135 13.977 0.244785 14.2552C0.405057 14.5334 0.63557 14.7646 0.913263 14.9257C1.19096 15.0868 1.50609 15.1722 1.82714 15.1733C2.14819 15.1744 2.46389 15.0911 2.74267 14.9319L12.8113 9.17708C13.0917 9.01666 13.3248 8.785 13.4869 8.50555C13.6489 8.22611 13.7343 7.90879 13.7343 7.58574C13.7343 7.26269 13.6489 6.94538 13.4869 6.66593C13.3248 6.38648 13.0917 6.15482 12.8113 5.99441L2.74267 0.241409Z"
+              fill="#1A3E3E"
+            />
+          </svg>
+        </div>
+      </div>
+    </div>
+    <div class="our_trip_wrapper">
+      <div class="our_trip_wrapper_top">
+        <p class="subtitle">о нашем походе</p>
+        <h5 class="title">Исследуйте все горные массивы мира вместе с нами</h5>
+      </div>
+      <p class="description">
+        Его корни уходят в один фрагмент классической латыни 45 года н.э., то есть более двух
+        тысячелетий назад. Ричард МакКлинток, профессор латыни из колледжа Hampden-Sydney, штат
+        Вирджиния, взял одно из самых странных слов в Lorem Ipsum, "consectetur"и занялся его
+        поисками в классической латинской литературе.
+      </p>
+      <button class="primary_btn">Программа тура</button>
+    </div>
+  </div>
+</section>
+<section class="offers">
+  <div class="container offers_container">
+    <div class="offers_wrapper">
+      <div class="offers_wrapper_top">
+        <p class="subtitle">наше предложение</p>
+        <h5 class="title">Лучшие программы для тебя</h5>
+      </div>
+      <p class="description">
+        Его корни уходят в один фрагмент классической латыни 45 года н.э., то есть более двух
+        тысячелетий назад. Ричард МакКлинток, профессор латыни из колледжа.
+      </p>
+      @for (offer of offers; track offer.title) {
+        <div class="offer">
+          <img src="{{ offer.icon_src }}" class="offer_icon" alt="{{ offer.title }}" />
+          <div class="offer_info">
+            <h6 class="offer_title">{{ offer.title }}</h6>
+            <p class="offer_description">{{ offer.description }}</p>
+          </div>
+        </div>
+      }
+      <button class="primary_btn">Стоимость программ</button>
+    </div>
+    <div class="offers_image">
+      <img src="/image/offer_1.png" alt="first_img" />
+      <img src="/image/offer_2.png" alt="second_img" />
+      <img src="/image/offer_3.png" alt="third_img" />
+      <img src="/image/offer_4.png" alt="forth_img" />
     </div>
   </div>
 </section>

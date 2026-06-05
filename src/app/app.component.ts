@@ -1,56 +1,64 @@
 import { Component } from '@angular/core';
 import { Colors } from '../enums/Color';
 import './collection';
-import { SelectComponent } from './common_ui/select/select.component';
+import { FormControl } from '@angular/forms';
+
+interface Offer {
+  title: string;
+  description: string;
+  icon_src: string;
+}
+
+interface Option<T> {
+  label: string;
+  value: T;
+}
 @Component({
   selector: 'app-root',
-  imports: [SelectComponent],
+  imports: [],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
   company_name = 'РУМТИБЕТ';
-  selects: Omit<SelectComponent, 'isOpen' | 'toggleDropdown'>[] = [
+  offers: Offer[] = [
     {
-      options: [
-        { label: 'Париж', value: 'paris' },
-        { label: 'Токио', value: 'tokyo' },
-        { label: 'Нью-Йорк', value: 'newyork' },
-        { label: 'Барселона', value: 'barcelona' },
-        { label: 'Амстердам', value: 'amsterdam' },
-        { label: 'Рим', value: 'rome' },
-      ],
-      placeholder: 'Локация для тура',
-      desc: 'Выберите из списка',
-      type: 'select',
+      title: 'Опытный гид',
+      description:
+        'Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации.',
+      icon_src: '/image/guide.png',
     },
     {
-      options: [
-        { label: 'Январь', value: '1' },
-        { label: 'Февраль', value: '2' },
-        { label: 'Март', value: '3' },
-        { label: 'Апрель', value: '4' },
-        { label: 'Май', value: '5' },
-        { label: 'Июнь', value: '6' },
-      ],
-      placeholder: 'Дата похода',
-      desc: 'укажите дату',
-      type: 'date',
+      title: 'Безопасный поход',
+      description:
+        'Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации.',
+      icon_src: '/image/shield.png',
     },
     {
-      options: [
-        { label: 'Максим', value: '1' },
-        { label: 'Анна', value: '2' },
-        { label: 'Федор', value: '3' },
-        { label: 'Алина', value: '4' },
-        { label: 'Виктор', value: '5' },
-        { label: 'Светлана', value: '6' },
-      ],
-      placeholder: 'Участники',
-      desc: 'выберите из списка',
-      type: 'select',
+      title: 'Лояльные цены',
+      description:
+        'Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации.',
+      icon_src: '/image/loyal.png',
     },
   ];
+
+  locations: Option<string>[] = [
+    { label: 'Алтай', value: 'altai' },
+    { label: 'Кавказ', value: 'caucasus' },
+    { label: 'Камчатка', value: 'kamchatka' },
+    { label: 'Байкал', value: 'baikal' },
+  ];
+
+  participants: Option<number>[] = [
+    { label: '1 человек', value: 1 },
+    { label: '2 человека', value: 2 },
+    { label: '3–5 человек', value: 5 },
+    { label: '6+ человек', value: 6 },
+  ];
+
+  selectedLocation: string = '';
+  selectedParticipants: number = 1;
+  selectedDate: string = '';
 
   //2
   isMainColor(color: string): boolean {
@@ -58,19 +66,19 @@ export class AppComponent {
   }
 
   //3
-  lastTime(){
-    let now:string = new Date().toLocaleDateString();
+  lastTime() {
+    let now: string = new Date().toLocaleDateString();
     localStorage.setItem('lastDate', now);
   }
 
   //4
-  setTime(){
+  setTime() {
     let time: number = +(localStorage.getItem('time') || 0);
     localStorage.setItem('time', (++time).toString());
   }
 
   constructor() {
-    this.lastTime()
-    this.setTime()
+    this.lastTime();
+    this.setTime();
   }
 }
