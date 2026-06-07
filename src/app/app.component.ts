@@ -121,6 +121,11 @@ export class AppComponent {
   selectedParticipants: number = 0;
   selectedDate: string = '';
 
+  constructor() {
+    this.lastTime();
+    this.setTime();
+  }
+
   onDatepickerFocus(event: FocusEvent) {
     const input = event.target as HTMLInputElement;
     input.type = 'date';
@@ -156,5 +161,16 @@ export class AppComponent {
   }
   addErrorMessage() {
     this.messageService.addMessage({ text: 'Message Content', type: messageTypes.ERROR });
+  }
+
+  lastTime() {
+    let now: string = new Date().toLocaleDateString();
+    this.localStorage.set('lastDate', now);
+  }
+
+  //4
+  setTime() {
+    let time: number = +(this.localStorage.get('time') || 0);
+    this.localStorage.set('time', (++time).toString());
   }
 }
