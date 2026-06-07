@@ -1,12 +1,9 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { Blog } from '../interfaces/blogs';
+import { Offer } from '../interfaces/offer';
+import { PopularTour } from '../interfaces/popular_tour';
 import './collection';
-
-interface Offer {
-  title: string;
-  description: string;
-  icon_src: string;
-}
 
 interface Option<T> {
   label: string;
@@ -20,6 +17,64 @@ interface Option<T> {
 })
 export class AppComponent {
   company_name = 'РУМТИБЕТ';
+  blogs: Blog[] = [
+    {
+      id: 1,
+      title: 'Красивая Италия, какая она в реальности?',
+      content:
+        'Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации.',
+      image_src: '/image/blogs/italy.png',
+      date: '01/04/2025',
+    },
+    {
+      id: 2,
+      title: 'Долой сомнения! Весь мир открыт для вас!',
+      content:
+        'Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации ... независимые способы реализации соответствующих...',
+      image_src: '/image/blogs/sky.png',
+      date: '01/04/2025',
+    },
+    {
+      id: 3,
+      title: 'Как подготовиться к путешествию в одиночку? ',
+      content: 'Для современного мира базовый вектор развития предполагает.',
+      image_src: '/image/blogs/single.png',
+      date: '01/04/2025',
+    },
+    {
+      id: 4,
+      title: 'Индия ... летим?',
+      content: 'Для современного мира базовый.',
+      image_src: '/image/blogs/indea.png',
+      date: '01/04/2025',
+    },
+  ];
+  popularTours: PopularTour[] = [
+    {
+      id: 1,
+      title: 'Озеро возле гор',
+      subtitle: 'романтическое приключение',
+      image_src: '/image/popular_tours/lake.png',
+      price: 480,
+      rating: 4.9,
+    },
+    {
+      id: 2,
+      title: 'Ночь в горах',
+      subtitle: 'в компании друзей',
+      image_src: '/image/popular_tours/night_mountain.png',
+      price: 580,
+      rating: 4.5,
+    },
+    {
+      id: 3,
+      title: 'Растяжка в горах',
+      subtitle: 'для тех, кто забоится о себе',
+      image_src: '/image/popular_tours/miditation.png',
+      price: 230,
+      rating: 5.0,
+    },
+  ];
   offers: Offer[] = [
     {
       title: 'Опытный гид',
@@ -58,41 +113,6 @@ export class AppComponent {
   selectedLocation: string = '';
   selectedParticipants: number = 0;
   selectedDate: string = '';
-
-  showTimer: boolean = true;
-  timerValue: string = new Date().toLocaleTimeString();
-  private timer!: number;
-  count: number = 0;
-  inputValue: string = '';
-  isLoading: boolean = true;
-
-  constructor() {
-    setTimeout(() => {
-      this.isLoading = false;
-      this.timer=setInterval(() => {
-        this.timerValue = new Date().toLocaleTimeString();
-      }, 1000);
-    }, 2000);
-  }
-
-  countUp() {
-    this.count++;
-  }
-
-  countDown() {
-    this.count--;
-  }
-
-  switchTimer() {
-    this.showTimer = !this.showTimer;
-    if (this.showTimer) {
-      this.timer=setInterval(() => {
-        this.timerValue = new Date().toLocaleTimeString();
-      }, 1000);
-    } else {
-      clearInterval(this.timer);
-    }
-  }
 
   onDatepickerFocus(event: FocusEvent) {
     const input = event.target as HTMLInputElement;
