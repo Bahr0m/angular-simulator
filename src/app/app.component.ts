@@ -1,9 +1,13 @@
-import { Component } from '@angular/core';
+import { NgTemplateOutlet } from '@angular/common';
+import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Blog } from '../interfaces/blogs';
 import { Offer } from '../interfaces/offer';
 import { PopularTour } from '../interfaces/popular_tour';
 import './collection';
+import { LocalStoreService } from './sevices/localStor/local-store.service';
+import { MessageService } from './sevices/message/message.service';
+import { messageTypes } from './sevices/message/message.type';
 
 interface Option<T> {
   label: string;
@@ -11,11 +15,14 @@ interface Option<T> {
 }
 @Component({
   selector: 'app-root',
-  imports: [FormsModule],
+  imports: [FormsModule, NgTemplateOutlet],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
+  messageService: MessageService = inject(MessageService);
+  localStorage: LocalStoreService = inject(LocalStoreService);
+
   company_name = 'РУМТИБЕТ';
   blogs: Blog[] = [
     {
@@ -136,5 +143,18 @@ export class AppComponent {
         `Поиск программ для ${this.selectedParticipants} участников в ${this.selectedLocation} на дату ${this.selectedDate}`,
       );
     }
+  }
+
+  addSuccessMessage() {
+    this.messageService.addMessage({ text: 'Message Content', type: messageTypes.SUCCESS });
+  }
+  addInfoMessage() {
+    this.messageService.addMessage({ text: 'Message Content', type: messageTypes.INFO });
+  }
+  addWarningMessage() {
+    this.messageService.addMessage({ text: 'Message Content', type: messageTypes.WARNING });
+  }
+  addErrorMessage() {
+    this.messageService.addMessage({ text: 'Message Content', type: messageTypes.ERROR });
   }
 }
