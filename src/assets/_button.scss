@@ -1,0 +1,29 @@
+@mixin button {
+  border: none;
+  border-radius: 4px;
+  padding: 16px 36px;
+  background-color: #1a3e3e;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 20px;
+  &:disabled {
+    background-color: grey;
+    color: var(--primary-color);
+    cursor: not-allowed;
+  }
+}
+
+.primary_btn {
+  @include button();
+  background-color: var(--secondary-color);
+  color: var(--white-color);
+}
+
+.secondary_btn {
+  @include button();
+  padding: 12px 24px;
+  font-weight: 600;
+  font-size: 16px;
+  background-color: var(--white-color);
+  color: var(--primary-color);
+}
