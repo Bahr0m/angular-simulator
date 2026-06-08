@@ -22,7 +22,6 @@ interface Option<T> {
 export class AppComponent {
   messageService: MessageService = inject(MessageService);
   localStorage: LocalStoreService = inject(LocalStoreService);
-
   company_name = 'РУМТИБЕТ';
   blogs: Blog[] = [
     {

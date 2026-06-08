@@ -6,11 +6,16 @@ import { IMessage, messageTypes } from './message.type';
 })
 export class MessageService {
   readonly messageTypes = messageTypes;
-  messages: IMessage[] = [];
+  private lastId = 0;
+  private messages: IMessage[] = [];
 
-  addMessage(new_message: Omit<IMessage, 'id'>) {
+  get list(): readonly IMessage[] {
+    return this.messages;
+  }
+
+  addMessage(new_message: Omit<IMessage, 'id'>): void {
     const message = {
-      id: Math.floor(Math.random() * 10),
+      id: ++this.lastId,
       ...new_message,
     };
     this.messages.unshift(message);
@@ -19,7 +24,7 @@ export class MessageService {
     }, 5000);
   }
 
-  closeMessage(id: number) {
+  closeMessage(id: number): void {
     this.messages = this.messages.filter((mesg) => mesg.id != id);
   }
 }
