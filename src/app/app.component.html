@@ -201,11 +201,8 @@
       <h6 class="title">{{ message.type }}</h6>
       <p class="text">{{ message.text }}</p>
     </div>
-    <img
-      src="/image/cross.svg"
-      alt="cross_icon"
-      class="close_icon"
-      (click)="messageService.closeMessage(message.id)"
-    />
+    <button class="toast_close_btn" (click)="messageService.closeMessage(message.id)">
+      <img src="/image/cross.svg" alt="cross_icon" class="close_icon" />
+    </button>
   </div>
 </ng-template>
