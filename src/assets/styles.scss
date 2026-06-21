@@ -8,9 +8,10 @@
   margin: 0;
 }
 :root {
-  --primary-color: #000;
+  --background_white_color: #fff;
+  --primary-color: #18121e;
   --secondary-color: #1a3e3e;
-  --white-color: #fff;
+  --white-color: #fdfdfd;
   --yellow-color: #f2be22;
   --grey-color: #f3f5f4;
 }
@@ -21,25 +22,7 @@
   max-width: 1180px;
   margin: 0 auto;
 }
-.description {
-  font-weight: 400;
-  font-size: 18px;
-  line-height: 150%;
-}
 
-.subtitle {
-  font-weight: 400;
-  font-size: 24px;
-  color: var(--yellow-color);
-  line-height: 20px;
-  margin-bottom: 8px;
-}
-
-.title {
-  font-weight: 800;
-  font-size: 32px;
-  line-height: 120%;
-}
 .f-18 {
   font-size: 18px;
 }
