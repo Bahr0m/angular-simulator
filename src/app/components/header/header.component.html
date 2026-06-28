@@ -1,0 +1,20 @@
+<header class="header">
+  <div class="container header_container">
+    <div class="logo_block">
+      <img src="image/logo.svg" class="logo" alt="Logo" />
+      <span>{{ company_name }}</span>
+    </div>
+    <nav class="flex g-24 f-18 semibold">
+      @for (link of links; track link.path) {
+        <a
+          routerLink="{{ link.path }}"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+          class="link"
+          >{{ link.text }}</a
+        >
+      }
+    </nav>
+    <button class="secondary_btn">Консультация</button>
+  </div>
+</header>
