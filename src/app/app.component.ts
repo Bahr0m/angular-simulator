@@ -1,16 +1,15 @@
-import { NgTemplateOutlet } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import './collection';
+import { FooterComponent } from './components/footer/footer.component';
+import { HeaderComponent } from './components/header/header.component';
+import { LoaderComponent } from './components/loader/loader.component';
+import { MessageComponent } from './components/message/message.component';
 import { LocalStoreService } from './sevices/localStor/local-store.service';
-import { MessageService } from './sevices/message/message.service';
-import { HeaderComponent } from "./components/header/header.component";
-import { FooterComponent } from "./components/footer/footer.component";
-import { MessageComponent } from "./components/message/message.component";
 
 @Component({
   selector: 'app-root',
-  imports: [NgTemplateOutlet, RouterOutlet, HeaderComponent, FooterComponent, MessageComponent],
+  imports: [RouterOutlet, HeaderComponent, FooterComponent, MessageComponent, LoaderComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })

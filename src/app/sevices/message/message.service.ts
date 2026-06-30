@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { IMessage, messageTypes } from './message.type';
 
 @Injectable({
@@ -7,25 +8,23 @@ import { IMessage, messageTypes } from './message.type';
 export class MessageService {
   readonly messageTypes = messageTypes;
   private lastId = 0;
-  private messages: IMessage[] = [];
-
-  get list(): readonly IMessage[] {
-    return this.messages;
-  }
+  private messagesSubject: BehaviorSubject<IMessage[]> = new BehaviorSubject<IMessage[]>([]);
+  message$: Observable<IMessage[]> = this.messagesSubject.asObservable();
 
   private addMessage(new_message: Omit<IMessage, 'id'>): void {
-    const message = {
+    const message: IMessage = {
       id: ++this.lastId,
       ...new_message,
     };
-    this.messages.unshift(message);
+    this.messagesSubject.next([message, ...this.messagesSubject.value]);
+
     setTimeout(() => {
       this.closeMessage(message.id);
     }, 5000);
   }
 
   closeMessage(id: number): void {
-    this.messages = this.messages.filter((mesg) => mesg.id != id);
+    this.messagesSubject.next(this.messagesSubject.value.filter((mesg) => mesg?.id != id));
   }
 
   showWarn(message: string) {

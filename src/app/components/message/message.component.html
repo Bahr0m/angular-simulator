@@ -10,9 +10,10 @@
     </button>
   </div>
 </ng-template>
-@if (messageService.list.length > 0) {
+@let messages = messageService.message$ | async;
+@if (messages!.length > 0) {
   <div class="toasts">
-    @for (message of messageService.list; track message.id) {
+    @for (message of messages; track message.id) {
       <ng-container
         [ngTemplateOutlet]="toast"
         [ngTemplateOutletContext]="{ message }"
