@@ -1,4 +1,4 @@
-import { AsyncPipe, JsonPipe } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { UserService } from '../../sevices/user/user.service';
@@ -6,7 +6,7 @@ import { IUser } from '../../sevices/user/user.tupe';
 
 @Component({
   selector: 'users-page',
-  imports: [AsyncPipe, JsonPipe],
+  imports: [AsyncPipe],
   templateUrl: './users.component.html',
   styleUrl: './users.component.scss',
 })

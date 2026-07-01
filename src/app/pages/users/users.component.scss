@@ -27,12 +27,6 @@
       gap: 55px;
       flex-wrap: wrap;
     }
-    .users_empty {
-      padding: 12px 24px;
-      border-radius: 4px;
-      background-color: red;
-      color: var(--white-color);
-    }
   }
 }
 
@@ -85,6 +79,8 @@
         align-items: center;
         gap: 12px;
         h6 {
+          max-width:max-content;
+          width: 100%;
           font-weight: 800;
           font-size: 12px;
           text-transform: uppercase;
@@ -114,6 +110,14 @@
           .value {
             font-weight: 700;
             font-size: 14px;
+          }
+          .mission {
+            padding-left: 52px;
+            color: #667c7c;
+            font-family: Nunito Sans;
+            font-weight: 700;
+            font-style: Italic;
+            font-size: 13px;
           }
           .coordinats {
             display: flex;

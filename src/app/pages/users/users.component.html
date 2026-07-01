@@ -70,7 +70,7 @@
                     </div>
                     <div class="user_content_block_list_row">
                       <p class="key">Миссия:</p>
-                      <p class="value">{{ user.company.catchPhrase }}</p>
+                      <p class="value mission">{{ user.company.catchPhrase }}</p>
                     </div>
                     <div class="user_content_block_list_row">
                       <p class="key">Веб-сайт:</p>
@@ -82,8 +82,6 @@
             </div>
           }
         </div>
-      } @else {
-        <div class="users_empty">Нет пользователей для отображения</div>
       }
     }
   </div>
