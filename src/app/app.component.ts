@@ -5,7 +5,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
 import { LoaderComponent } from './components/loader/loader.component';
 import { MessageComponent } from './components/message/message.component';
-import { LocalStoreService } from './sevices/localStor/local-store.service';
+import { LocalStoreService } from './services/localStor/local-store.service';
 
 @Component({
   selector: 'app-root',

@@ -1,9 +1,9 @@
 import { inject, Injectable } from '@angular/core';
-import { BehaviorSubject, catchError, finalize, from, Observable, tap } from 'rxjs';
+import { BehaviorSubject, catchError, finalize, Observable, of, tap } from 'rxjs';
 import { LoaderService } from '../loader/loader.service';
 import { MessageService } from './../message/message.service';
 import { UserApiService } from './user-api.service';
-import { IUser } from './user.tupe';
+import { IUser } from './user.type';
 
 @Injectable({
   providedIn: 'root',
@@ -30,13 +30,14 @@ export class UserService {
       .pipe(
         catchError(() => {
           this.messageService.showError('Не удалось получить пользователей');
-          return from([]);
+          return of([]);
         }),
+        tap((users: IUser[]) => this.setUsers(users)),
+
         finalize(() => {
           console.log(`hide`);
           this.loaderService.hideLoader();
         }),
-        tap((users: IUser[]) => this.setUsers(users)),
       )
       .subscribe();
   }

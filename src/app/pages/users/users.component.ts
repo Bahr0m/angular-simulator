@@ -1,8 +1,8 @@
 import { AsyncPipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { Observable } from 'rxjs';
-import { UserService } from '../../sevices/user/user.service';
-import { IUser } from '../../sevices/user/user.tupe';
+import { UserService } from '../../services/user/user.service';
+import { IUser } from '../../services/user/user.type';
 
 @Component({
   selector: 'users-page',
