@@ -3,7 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { Blog } from '../../../interfaces/blogs';
 import { Offer } from '../../../interfaces/offer';
 import { PopularTour } from '../../../interfaces/popular_tour';
-import { MessageService } from '../../sevices/message/message.service';
+import { MessageService } from '../../services/message/message.service';
 interface Option<T> {
   label: string;
   value: T;

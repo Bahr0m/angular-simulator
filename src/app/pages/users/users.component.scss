@@ -1,7 +1,143 @@
 .users {
   width: 100%;
-  height: 100vh;
+  height: 100%;
+  min-height: 100vh;
+  padding: 200px 0;
   display: flex;
-  flex-direction: center;
+  justify-content: center;
+  align-items: start;
+  background-color: var(--grey-color);
+  &_container {
+    width: 100%;
+    max-width: 1310px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 80px;
+    .users_title {
+      font-weight: 800;
+      font-size: 48px;
+      color: var(--primary-color);
+    }
+    .users_wrapper {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 55px;
+      flex-wrap: wrap;
+    }
+  }
+}
+
+.user {
+  height: 600px;
+  max-width: 400px;
+  width: 100%;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
   align-items: center;
+  gap: 25px;
+  border-radius: 4px;
+  border-top: 4px solid var(--orange-color);
+  background-color: var(--background_white_color);
+  box-shadow: 0px 10px 30px 0px #0000000f;
+
+  &_header {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 4px;
+    &_title {
+      font-weight: 800;
+      font-size: 26px;
+    }
+    &_desc {
+      font-weight: 700;
+      font-size: 15px;
+      color: var(--orange-color);
+    }
+  }
+  &_content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+    &_block {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: start;
+      gap: 12px;
+      &_title {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        h6 {
+          max-width:max-content;
+          width: 100%;
+          font-weight: 800;
+          font-size: 12px;
+          text-transform: uppercase;
+        }
+        span {
+          width: 100%;
+          height: 1px;
+          background-color: var(--grey-color);
+        }
+      }
+      &_list {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+        gap: 8px;
+        &_row {
+          width: 100%;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          .key {
+            font-weight: 400;
+            font-size: 14px;
+            color: #667c7c;
+          }
+          .value {
+            font-weight: 700;
+            font-size: 14px;
+          }
+          .mission {
+            padding-left: 52px;
+            color: #667c7c;
+            font-family: Nunito Sans;
+            font-weight: 700;
+            font-style: Italic;
+            font-size: 13px;
+          }
+          .coordinats {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            .geo {
+              border-radius: 3px;
+              padding: 0.5px 6px;
+              background-color: var(--grey-color);
+              border: 1px solid #e2e8f0;
+              font-family: Inter;
+              font-weight: 700;
+              font-size: 12px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+.orange {
+  color: var(--orange-color);
 }
