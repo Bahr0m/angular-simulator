@@ -15,6 +15,13 @@ export class UserService {
   private usersSubject: BehaviorSubject<IUser[]> = new BehaviorSubject<IUser[]>([]);
   readonly users$: Observable<IUser[]> = this.usersSubject.asObservable();
 
+
+  removeUser(id: number) {
+    const users = this.usersSubject.getValue();
+    const updatedUsers = users.filter((user) => user.id !== id);
+    this.setUsers(updatedUsers);
+  }
+
   setUsers(users: IUser[]): void {
     this.usersSubject.next(users);
   }
