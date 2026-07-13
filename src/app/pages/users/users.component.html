@@ -1,14 +1,12 @@
 <div class="users">
   <div class="users_container">
     <h2 class="users_title">Список Пользователей</h2>
-    <div>
-      <button>Создать пользователя</button>
-    </div>
+    <user-create (userCreated)="addUser($event)" />
     <div class="users_wrapper">
       @for (user of users$ | async; track user.id) {
         <user-card [user]="user" (remove)="removeUser(user.id)" />
       } @empty {
-        <div></div>
+        <div>Пользователи не найдены</div>
       }
     </div>
   </div>

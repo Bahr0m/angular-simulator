@@ -19,8 +19,7 @@
     <label for="website">Website</label>
     <input type="text" id="website" formControlName="website" />
   </div>
-  <div formGroupName="address">
-    <h2>Address</h2>
+  <ng-container formGroupName="address">
     <div class="form-group">
       <label for="city">City</label>
       <input type="text" id="city" formControlName="city" />
@@ -37,9 +36,8 @@
       <label for="zipcode">Zip Code</label>
       <input type="text" id="zipcode" formControlName="zipcode" />
     </div>
-  </div>
-  <div formGroupName="company">
-    <h2>Company</h2>
+  </ng-container>
+  <ng-container formGroupName="company">
     <div class="form-group">
       <label for="companyName">Company Name</label>
       <input type="text" id="companyName" formControlName="name" />
@@ -52,5 +50,6 @@
       <label for="bs">BS</label>
       <input type="text" id="bs" formControlName="bs" />
     </div>
-  </div>
+  </ng-container>
 </form>
+<button (click)="onSubmit()" [disabled]="!createUserForm.valid">Создать пользователя</button>

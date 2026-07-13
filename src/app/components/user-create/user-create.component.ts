@@ -1,49 +1,52 @@
-import { Component } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Component, EventEmitter, inject, Output } from '@angular/core';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { UserService } from '../../services/user/user.service';
+import { IUser } from '../../services/user/user.type';
 
 @Component({
-  selector: 'app-user-create',
+  selector: 'user-create',
   imports: [ReactiveFormsModule],
   templateUrl: './user-create.component.html',
   styleUrl: './user-create.component.scss',
 })
 export class UserCreateComponent {
-  createUserForm = new FormGroup({
-    name: new FormControl('', [
-      Validators.required,
-      Validators.minLength(2),
-      Validators.maxLength(100),
-    ]),
-    username: new FormControl('', [
-      Validators.required,
-      Validators.minLength(3),
-      Validators.maxLength(30),
-    ]),
-    email: new FormControl('', [Validators.required, Validators.email, Validators.maxLength(100)]),
-    phone: new FormControl('', [
-      Validators.required,
-      Validators.minLength(10),
-      Validators.maxLength(25),
-    ]),
-    website: new FormControl('', [Validators.maxLength(100)]),
-    address: new FormGroup({
-      city: new FormControl('', [Validators.required, Validators.maxLength(50)]),
-      street: new FormControl('', [Validators.required, Validators.maxLength(100)]),
-      suite: new FormControl('', [Validators.maxLength(50)]),
-      zipcode: new FormControl('', [
+  @Output() userCreated: EventEmitter<IUser> = new EventEmitter<IUser>();
+  userService = inject(UserService);
+  private fb: FormBuilder = inject(FormBuilder);
+  createUserForm = this.fb.group({
+    name: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(100)]],
+    username: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(30)]],
+    email: ['', [Validators.required, Validators.email, Validators.maxLength(100)]],
+    phone: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(25)]],
+    website: ['', [Validators.maxLength(100)]],
+    address: this.fb.group({
+      city: ['', [Validators.required, Validators.maxLength(50)]],
+      street: ['', [Validators.required, Validators.maxLength(100)]],
+      suite: this.fb.control('', [Validators.maxLength(50)]),
+      zipcode: this.fb.control('', [
         Validators.required,
         Validators.minLength(5),
         Validators.maxLength(10),
       ]),
-      geo: new FormGroup({
-        lat: new FormControl('', [Validators.required, Validators.maxLength(20)]),
-        lng: new FormControl('', [Validators.required, Validators.maxLength(20)]),
+      geo: this.fb.group({
+        lat: this.fb.control('', [Validators.required, Validators.maxLength(20)]),
+        lng: this.fb.control('', [Validators.required, Validators.maxLength(20)]),
       }),
     }),
-    company: new FormGroup({
-      name: new FormControl('', [Validators.required, Validators.maxLength(50)]),
-      catchPhrase: new FormControl('', [Validators.maxLength(200)]),
-      bs: new FormControl('', [Validators.maxLength(100)]),
+    company: this.fb.group({
+      name: this.fb.control('', [Validators.required, Validators.maxLength(50)]),
+      catchPhrase: this.fb.control('', [Validators.maxLength(200)]),
+      bs: this.fb.control('', [Validators.maxLength(100)]),
     }),
   });
+
+  onSubmit() {
+    if (this.createUserForm.valid) {
+      const newUser = { ...(this.createUserForm.value as IUser), id: Date.now() };
+      this.userCreated.emit(newUser);
+      this.createUserForm.reset();
+    } else {
+      console.log('Форма содержит ошибки. Пожалуйста, исправьте их перед отправкой.');
+    }
+  }
 }
