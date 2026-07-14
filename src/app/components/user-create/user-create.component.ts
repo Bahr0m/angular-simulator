@@ -10,7 +10,7 @@ import { IUser } from '../../services/user/user.type';
   styleUrl: './user-create.component.scss',
 })
 export class UserCreateComponent {
-  @Output() userCreated: EventEmitter<IUser> = new EventEmitter<IUser>();
+  @Output() addUser: EventEmitter<IUser> = new EventEmitter<IUser>();
   userService = inject(UserService);
   private fb: FormBuilder = inject(FormBuilder);
   createUserForm = this.fb.group({
@@ -43,7 +43,7 @@ export class UserCreateComponent {
   onSubmit() {
     if (this.createUserForm.valid) {
       const newUser = { ...(this.createUserForm.value as IUser), id: Date.now() };
-      this.userCreated.emit(newUser);
+      this.addUser.emit(newUser);
       this.createUserForm.reset();
     } else {
       console.log('Форма содержит ошибки. Пожалуйста, исправьте их перед отправкой.');

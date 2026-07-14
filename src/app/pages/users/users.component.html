@@ -1,7 +1,7 @@
 <div class="users">
   <div class="users_container">
     <h2 class="users_title">Список Пользователей</h2>
-    <user-create (userCreated)="addUser($event)" />
+    <user-create (addUser)="addUser($event)" />
     <div class="users_wrapper">
       @for (user of users$ | async; track user.id) {
         <user-card [user]="user" (remove)="removeUser(user.id)" />
