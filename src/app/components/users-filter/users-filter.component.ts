@@ -1,4 +1,4 @@
-import { Component, DestroyRef, inject, OnInit, Output } from '@angular/core';
+import { Component, DestroyRef, EventEmitter, inject, OnInit, Output } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormControl } from '@angular/forms';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
@@ -10,7 +10,7 @@ import { debounceTime, distinctUntilChanged } from 'rxjs';
   styleUrl: './users-filter.component.scss',
 })
 export class UsersFilterComponent implements OnInit {
-  @Output() filterUsers: (filterValue: string) => void = () => {};
+  @Output() filterUsers: EventEmitter<string> = new EventEmitter<string>();
   private destroyRef = inject(DestroyRef);
   input = new FormControl('');
 
@@ -18,7 +18,7 @@ export class UsersFilterComponent implements OnInit {
     this.input.valueChanges
       .pipe(distinctUntilChanged(), debounceTime(200), takeUntilDestroyed(this.destroyRef))
       .subscribe((value) => {
-        this.filterUsers(value || '');
+        this.filterUsers.emit(value || '');
       });
   }
 }

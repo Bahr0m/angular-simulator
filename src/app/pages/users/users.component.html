@@ -1,10 +1,11 @@
 <div class="users">
   <div class="users_container">
+    <users-filter (filterUsers)="onFilterUsers($event)" />
     <h2 class="users_title">Список Пользователей</h2>
     <user-create (addUser)="addUser($event)" />
     <div class="users_wrapper">
-      @for (user of users$ | async; track user.id) {
-        <user-card [user]="user" (remove)="removeUser(user.id)" />
+      @for (user of filteredUsers$ | async; track user.id) {
+        <user-card [user]="user" (remove)="onRemoveUser(user.id)" />
       } @empty {
         <div>Пользователи не найдены</div>
       }
