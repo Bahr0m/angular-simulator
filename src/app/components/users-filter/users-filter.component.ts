@@ -12,12 +12,13 @@ import { debounceTime, distinctUntilChanged } from 'rxjs';
 export class UsersFilterComponent implements OnInit {
   @Output() filterUsers: EventEmitter<string> = new EventEmitter<string>();
   private destroyRef = inject(DestroyRef);
-  input = new FormControl('');
+  search = new FormControl('');
 
   ngOnInit() {
-    this.input.valueChanges
-      .pipe(distinctUntilChanged(), debounceTime(200), takeUntilDestroyed(this.destroyRef))
+    this.search.valueChanges
+      .pipe( debounceTime(200),distinctUntilChanged(), takeUntilDestroyed(this.destroyRef))
       .subscribe((value) => {
+        console.log(`value`, value);
         this.filterUsers.emit(value || '');
       });
   }

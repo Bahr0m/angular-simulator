@@ -1,6 +1,13 @@
 import { AsyncPipe } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
-import { BehaviorSubject, combineLatest, distinctUntilChanged, map, Observable } from 'rxjs';
+import {
+  BehaviorSubject,
+  combineLatest,
+  debounceTime,
+  distinctUntilChanged,
+  map,
+  Observable,
+} from 'rxjs';
 import { UserCardComponent } from '../../components/user-card/user-card.component';
 import { UserCreateComponent } from '../../components/user-create/user-create.component';
 import { UsersFilterComponent } from '../../components/users-filter/users-filter.component';
@@ -16,11 +23,11 @@ import { IUser } from '../../services/user/user.type';
 export class UsersPage implements OnInit {
   private usersService: UserService = inject(UserService);
   users$: Observable<IUser[]> = this.usersService.getUsers();
-  private filterTerm$ = new BehaviorSubject('');
+  private filterSubject = new BehaviorSubject('');
 
-  filteredUsers$ = combineLatest([
+  public filteredUsers$ = combineLatest([
     this.users$,
-    this.filterTerm$.asObservable().pipe(distinctUntilChanged()),
+    this.filterSubject.asObservable().pipe(debounceTime(200), distinctUntilChanged()),
   ]).pipe(
     map(([users, filterTerm]) => {
       const term = filterTerm.toLowerCase().trim();
@@ -28,12 +35,16 @@ export class UsersPage implements OnInit {
     }),
   );
 
-  onFilterUsers(filterValue: string): void {
-    this.filterTerm$.next(filterValue);
+  ngOnChanges() {
+    console.log(`Filter value changed to: ${this.filteredUsers$}`);
   }
 
   ngOnInit() {
     this.usersService.loadUsers();
+  }
+
+  onFilterUsers(filterValue: string): void {
+    this.filterSubject.next(filterValue);
   }
 
   onRemoveUser(id: number) {
