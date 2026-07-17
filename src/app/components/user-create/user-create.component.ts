@@ -1,6 +1,5 @@
 import { Component, EventEmitter, inject, Output } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { UserService } from '../../services/user/user.service';
 import { IUser } from '../../services/user/user.type';
 
 @Component({
@@ -11,7 +10,6 @@ import { IUser } from '../../services/user/user.type';
 })
 export class UserCreateComponent {
   @Output() addUser: EventEmitter<IUser> = new EventEmitter<IUser>();
-  userService = inject(UserService);
   private fb: FormBuilder = inject(FormBuilder);
   createUserForm = this.fb.group({
     name: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(100)]],
