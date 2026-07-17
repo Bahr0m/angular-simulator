@@ -35,10 +35,6 @@ export class UsersPage implements OnInit {
     }),
   );
 
-  ngOnChanges() {
-    console.log(`Filter value changed to: ${this.filteredUsers$}`);
-  }
-
   ngOnInit() {
     this.usersService.loadUsers();
   }

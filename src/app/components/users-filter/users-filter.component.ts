@@ -1,11 +1,11 @@
 import { Component, DestroyRef, EventEmitter, inject, OnInit, Output } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { FormControl } from '@angular/forms';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
 
 @Component({
   selector: 'users-filter',
-  imports: [],
+  imports: [ReactiveFormsModule],
   templateUrl: './users-filter.component.html',
   styleUrl: './users-filter.component.scss',
 })
@@ -18,7 +18,6 @@ export class UsersFilterComponent implements OnInit {
     this.search.valueChanges
       .pipe( debounceTime(200),distinctUntilChanged(), takeUntilDestroyed(this.destroyRef))
       .subscribe((value) => {
-        console.log(`value`, value);
         this.filterUsers.emit(value || '');
       });
   }
