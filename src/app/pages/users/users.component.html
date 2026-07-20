@@ -1,88 +1,14 @@
 <div class="users">
   <div class="users_container">
     <h2 class="users_title">Список Пользователей</h2>
-    @if (users$ | async; as users) {
-      @if (users.length > 0) {
-        <div class="users_wrapper">
-          @for (user of users; track user.id) {
-            <div class="user">
-              <div class="user_header">
-                <h5 class="user_header_title">{{ user.name }}</h5>
-                <p class="user_header_desc">{{ user.username }}</p>
-              </div>
-              <div class="user_content">
-                <div class="user_content_block">
-                  <div class="user_content_block_title">
-                    <h6>Контакты</h6>
-                    <span></span>
-                  </div>
-                  <div class="user_content_block_list">
-                    <div class="user_content_block_list_row">
-                      <p class="key">Эл. почта:</p>
-                      <p class="value orange">{{ user.email }}</p>
-                    </div>
-                    <div class="user_content_block_list_row">
-                      <p class="key">Телефон:</p>
-                      <p class="value">{{ user.phone }}</p>
-                    </div>
-                    <div class="user_content_block_list_row">
-                      <p class="key">Веб-сайт:</p>
-                      <p class="value orange">{{ user.website }}</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="user_content_block">
-                  <div class="user_content_block_title">
-                    <h6>Адрес Проживания</h6>
-                    <span></span>
-                  </div>
-                  <div class="user_content_block_list">
-                    <div class="user_content_block_list_row">
-                      <p class="key">Город:</p>
-                      <p class="value">{{ user.address.city }}</p>
-                    </div>
-                    <div class="user_content_block_list_row">
-                      <p class="key">Офис:</p>
-                      <p class="value">{{ user.address.suite }}</p>
-                    </div>
-                    <div class="user_content_block_list_row">
-                      <p class="key">Индекс:</p>
-                      <p class="value">{{ user.address.zipcode }}</p>
-                    </div>
-                    <div class="user_content_block_list_row">
-                      <p class="key">Координаты:</p>
-                      <p class="coordinats">
-                        <span class="geo">{{ user.address.geo.lat }}</span>
-                        <span class="geo">{{ user.address.geo.lng }}</span>
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <div class="user_content_block">
-                  <div class="user_content_block_title">
-                    <h6>Место работы</h6>
-                    <span></span>
-                  </div>
-                  <div class="user_content_block_list">
-                    <div class="user_content_block_list_row">
-                      <p class="key">Компания:</p>
-                      <p class="value">{{ user.company.name }}</p>
-                    </div>
-                    <div class="user_content_block_list_row">
-                      <p class="key">Миссия:</p>
-                      <p class="value mission">{{ user.company.catchPhrase }}</p>
-                    </div>
-                    <div class="user_content_block_list_row">
-                      <p class="key">Веб-сайт:</p>
-                      <p class="value">{{ user.website }}</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          }
-        </div>
+    <user-create (addUser)="addUser($event)" />
+    <users-filter (filterUsers)="onFilterUsers($event)" />
+    <div class="users_wrapper">
+      @for (user of filteredUsers$ | async; track user.id) {
+        <user-card [user]="user" (remove)="onRemoveUser(user.id)" />
+      } @empty {
+        <div>Пользователи не найдены</div>
       }
-    }
+    </div>
   </div>
 </div>

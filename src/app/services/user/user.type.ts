@@ -5,7 +5,7 @@ interface IGeo {
 
 interface IAddress {
   street: string;
-  suite: string;
+  suite?: string;
   city: string;
   zipcode: string;
   geo: IGeo;
@@ -13,8 +13,8 @@ interface IAddress {
 
 interface ICompany {
   name: string;
-  catchPhrase: string;
-  bs: string;
+  catchPhrase?: string;
+  bs?: string;
 }
 
 export interface IUser {
@@ -24,6 +24,6 @@ export interface IUser {
   email: string;
   address: IAddress;
   phone: string;
-  website: string;
+  website?: string;
   company: ICompany;
 }
