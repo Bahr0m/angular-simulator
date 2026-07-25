@@ -4,19 +4,22 @@ import { Blog } from '../../../interfaces/blogs';
 import { Offer } from '../../../interfaces/offer';
 import { PopularTour } from '../../../interfaces/popular_tour';
 import { MessageService } from '../../services/message/message.service';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { faPlay, faStar, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 interface Option<T> {
   label: string;
   value: T;
 }
 @Component({
   selector: 'home-page',
-  imports: [FormsModule],
+  imports: [FontAwesomeModule, FormsModule],
   templateUrl: './home.component.html',
-  styleUrl: './home.component.scss',
+  styleUrls: ['./home.component.scss'],
 })
 export class HomePage {
   messageService: MessageService = inject(MessageService);
-
+  faPlay:IconDefinition=faPlay;
+  faStar:IconDefinition=faStar;
   blogs: Blog[] = [
     {
       id: 1,
