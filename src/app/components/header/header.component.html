@@ -15,6 +15,18 @@
         >
       }
     </nav>
-    <button class="secondary_btn">Консультация</button>
+    <div class="header_btns">
+      <button class="secondary_btn">Консультация</button>
+      <p-toggleswitch [(ngModel)]="darkMode" (onChange)="toggleMode($event)">
+        <ng-template #handle let-checked="checked">
+          @if(darkMode) {
+            <fa-icon [icon]="moon"/>
+          } @else {
+            <fa-icon [icon]="sun"/>
+          }
+        </ng-template>
+      </p-toggleswitch>
+      <p-selectbutton [options]="themes" [(ngModel)]="theme" optionLabel="name" optionValue="value" (onChange)="changeTheme($event)" />
+    </div>
   </div>
 </header>
