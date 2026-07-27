@@ -1,8 +1,10 @@
-import { inject, Service } from '@angular/core';
-
+import { inject, Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { LocalStoreService } from '../localStor/local-store.service';
-@Service()
+
+@Injectable({
+  providedIn: 'root',
+})
 export class ThemeService {
   localStorageService: LocalStoreService = inject(LocalStoreService);
   private localStorageKey = 'theme';
