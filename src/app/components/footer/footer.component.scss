@@ -129,12 +129,13 @@
         .social {
           display: flex;
           gap: 16px;
-          &_icon {
-            width: 32px;
-            height: 32px;
-          }
         }
       }
+    }
+    .social_icon {
+      width: 32px;
+      height: 32px;
+      color: var(--white-color);
     }
 
     .additional_info_wrapper {

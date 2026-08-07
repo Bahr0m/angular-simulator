@@ -14,7 +14,13 @@
   --white-color: #fdfdfd;
   --yellow-color: #f2be22;
   --grey-color: #f3f5f4;
-  --orange-color: #D4A373;
+  --orange-color: #d4a373;
+}
+
+@mixin ng-deep {
+  :host ::ng-deep {
+    @content;
+  }
 }
 
 .container {

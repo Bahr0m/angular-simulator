@@ -36,5 +36,10 @@
         text-decoration: underline;
       }
     }
+    .header_btns {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
   }
 }
