@@ -13,10 +13,11 @@ import { UserCreateComponent } from '../../components/user-create/user-create.co
 import { UsersFilterComponent } from '../../components/users-filter/users-filter.component';
 import { UserService } from '../../services/user/user.service';
 import { IUser } from '../../services/user/user.type';
+import { PluralPipe } from '../../helpers/pipes/plural.pipe';
 
 @Component({
   selector: 'users-page',
-  imports: [AsyncPipe, UserCardComponent, UserCreateComponent, UsersFilterComponent],
+  imports: [AsyncPipe, UserCardComponent, UserCreateComponent, UsersFilterComponent,PluralPipe],
   templateUrl: './users.component.html',
   styleUrl: './users.component.scss',
 })

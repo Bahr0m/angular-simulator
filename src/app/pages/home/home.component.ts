@@ -1,11 +1,11 @@
 import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Blog } from '../../../interfaces/blogs';
-import { Offer } from '../../../interfaces/offer';
-import { PopularTour } from '../../../interfaces/popular_tour';
 import { MessageService } from '../../services/message/message.service';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faPlay, faStar, IconDefinition } from '@fortawesome/free-solid-svg-icons';
+import { Blog } from '../../helpers/interfaces/blogs';
+import { PopularTour } from '../../helpers/interfaces/popular_tour';
+import { Offer } from '../../helpers/interfaces/offer';
 interface Option<T> {
   label: string;
   value: T;

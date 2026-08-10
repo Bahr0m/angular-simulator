@@ -1,6 +1,11 @@
 <div class="users">
   <div class="users_container">
-    <h2 class="users_title">Список Пользователей</h2>
+    <h2 class="users_title">
+      Список
+      {{
+        (filteredUsers$ | async)!.length | plural: 'Пользователь' : 'Пользователя' : 'Пользователей'
+      }}
+    </h2>
     <user-create (addUser)="addUser($event)" />
     <users-filter (filterUsers)="onFilterUsers($event)" />
     <div class="users_wrapper">

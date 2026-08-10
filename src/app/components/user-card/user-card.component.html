@@ -1,6 +1,6 @@
 <div class="user">
   <div class="user_header">
-    <h5 class="user_header_title">{{ user.name }}</h5>
+    <h5 class="user_header_title">{{ user.name | uppercase}}</h5>
     <p class="user_header_desc">{{ user.username }}</p>
   </div>
   <div class="user_content">
@@ -16,7 +16,7 @@
         </div>
         <div class="user_content_block_list_row">
           <p class="key">Телефон:</p>
-          <p class="value">{{ user.phone }}</p>
+          <p class="value">{{ user.phone | phone: 'international' }}</p>
         </div>
         <div class="user_content_block_list_row">
           <p class="key">Веб-сайт:</p>
@@ -73,6 +73,6 @@
     </div>
   </div>
   <div class="user_footer">
-    <button class="user_footer_btn" (click)="remove.emit(user.id)">Удалить</button>
+    <button class="user_footer_btn" textBold (click)="remove.emit(user.id)">Удалить</button>
   </div>
 </div>
