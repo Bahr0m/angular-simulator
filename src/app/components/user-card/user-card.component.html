@@ -1,6 +1,6 @@
-<div class="user">
+<div class="user" animatedGradient [GradientConfiguration]="{ delay: 1000, colors: ['red', 'blue'], thickness: 3 }">
   <div class="user_header">
-    <h5 class="user_header_title">{{ user.name | uppercase}}</h5>
+    <h5 class="user_header_title">{{ user.name | uppercase }}</h5>
     <p class="user_header_desc">{{ user.username }}</p>
   </div>
   <div class="user_content">
@@ -20,7 +20,7 @@
         </div>
         <div class="user_content_block_list_row">
           <p class="key">Веб-сайт:</p>
-          <p class="value orange">{{ user.website || "Неизвестно" }}</p>
+          <p class="value orange">{{ user.website || 'Неизвестно' }}</p>
         </div>
       </div>
     </div>
@@ -36,7 +36,7 @@
         </div>
         <div class="user_content_block_list_row">
           <p class="key">Офис:</p>
-          <p class="value">{{ user.address.suite || "Неизвестно" }}</p>
+          <p class="value">{{ user.address.suite || 'Неизвестно' }}</p>
         </div>
         <div class="user_content_block_list_row">
           <p class="key">Индекс:</p>
@@ -63,16 +63,26 @@
         </div>
         <div class="user_content_block_list_row">
           <p class="key">Миссия:</p>
-          <p class="value mission">{{ user.company.catchPhrase || "Неизвестно" }}</p>
+          <p class="value mission">{{ user.company.catchPhrase || 'Неизвестно' }}</p>
         </div>
         <div class="user_content_block_list_row">
           <p class="key">Веб-сайт:</p>
-          <p class="value">{{ user.company.bs || "Неизвестно" }}</p>
+          <p class="value">{{ user.company.bs || 'Неизвестно' }}</p>
         </div>
       </div>
     </div>
   </div>
   <div class="user_footer">
-    <button class="user_footer_btn" textBold (click)="remove.emit(user.id)">Удалить</button>
+    <button
+      pButton
+      textBold
+      id="delete-user-{{ user.id }}"
+      type="button"
+      severity="danger"
+      class="delete-user-button"
+      (click)="remove.emit(user.id)"
+    >
+      Удалить пользователя
+    </button>
   </div>
 </div>

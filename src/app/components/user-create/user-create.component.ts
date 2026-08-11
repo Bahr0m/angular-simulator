@@ -2,10 +2,11 @@ import { Component, EventEmitter, inject, Output } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { IUser } from '../../services/user/user.type';
 import { BoldDirective } from '../../helpers/directives/bold.directive';
+import { AnimateDirective } from '../../helpers/directives/animate.directive';
 
 @Component({
   selector: 'user-create',
-  imports: [ReactiveFormsModule, BoldDirective],
+  imports: [ReactiveFormsModule, BoldDirective, AnimateDirective],
   templateUrl: './user-create.component.html',
   styleUrl: './user-create.component.scss',
 })

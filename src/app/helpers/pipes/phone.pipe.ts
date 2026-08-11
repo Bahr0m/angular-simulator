@@ -9,7 +9,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class PhonePipe implements PipeTransform {
 
   transform(value: string, type: string): string {
-    const phone_number = value.replace(/[()\-.\s]/g, '');
+    const phone_number = value.replace(/\D/g, '');
     if(type === 'compact') {
       return "+" + phone_number;
     }
