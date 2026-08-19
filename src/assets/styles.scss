@@ -14,6 +14,13 @@
   --white-color: #fdfdfd;
   --yellow-color: #f2be22;
   --grey-color: #f3f5f4;
+  --orange-color: #d4a373;
+}
+
+@mixin ng-deep {
+  :host ::ng-deep {
+    @content;
+  }
 }
 
 .container {
@@ -23,10 +30,12 @@
   margin: 0 auto;
 }
 
+.f-20 {
+  font-size: 18px;
+}
 .f-18 {
   font-size: 18px;
 }
-
 .f-16 {
   font-size: 16px;
 }

@@ -1,0 +1,23 @@
+<ng-template #toast let-message="message">
+  <div class="toast">
+    <img src="/image/message.svg" alt="toast_icon" class="toast_icon" />
+    <div class="toast_content">
+      <h6 class="title">{{ message.type }}</h6>
+      <p class="text">{{ message.text }}</p>
+    </div>
+    <button class="toast_close_btn" (click)="messageService.closeMessage(message.id)">
+      <img src="/image/cross.svg" alt="cross_icon" class="close_icon" />
+    </button>
+  </div>
+</ng-template>
+@let messages = messageService.message$ | async;
+@if (messages!.length > 0) {
+  <div class="toasts">
+    @for (message of messages; track message.id) {
+      <ng-container
+        [ngTemplateOutlet]="toast"
+        [ngTemplateOutletContext]="{ message }"
+      ></ng-container>
+    }
+  </div>
+}
