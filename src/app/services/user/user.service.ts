@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { BehaviorSubject, catchError, finalize, Observable, of, tap } from 'rxjs';
+import { BehaviorSubject, finalize, Observable, of, tap } from 'rxjs';
 import { LoaderService } from '../loader/loader.service';
 import { LocalStoreService } from '../localStor/local-store.service';
 import { MessageService } from './../message/message.service';
@@ -45,10 +45,6 @@ export class UserService {
     const users$ = storedUsers ? of(storedUsers) : this.UserApi.getUsers();
     users$
       .pipe(
-        catchError(() => {
-          this.MessageService.showError('Не удалось получить пользователей');
-          return of([]);
-        }),
         tap((users: IUser[]) => this.setUsers(users)),
         finalize(() => {
           this.LoaderService.hideLoader();
