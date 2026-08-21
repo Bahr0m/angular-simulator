@@ -13,7 +13,6 @@ export const localStorageKey = 'users';
 export class UserService {
   private UserApi: UserApiService = inject(UserApiService);
   private LocalStoreService: LocalStoreService = inject(LocalStoreService);
-  private MessageService: MessageService = inject(MessageService);
   private LoaderService: LoaderService = inject(LoaderService);
   private usersSubject: BehaviorSubject<IUser[]> = new BehaviorSubject<IUser[]>([]);
   readonly users$: Observable<IUser[]> = this.usersSubject.asObservable();
