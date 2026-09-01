@@ -1,8 +1,6 @@
 import { inject, Injectable } from '@angular/core';
-import { BehaviorSubject, finalize, Observable, of, tap } from 'rxjs';
-import { LoaderService } from '../loader/loader.service';
+import { BehaviorSubject, Observable, of, tap } from 'rxjs';
 import { LocalStoreService } from '../localStor/local-store.service';
-import { MessageService } from './../message/message.service';
 import { UserApiService } from './user-api.service';
 import { IUser } from './user.type';
 
@@ -13,7 +11,6 @@ export const localStorageKey = 'users';
 export class UserService {
   private UserApi: UserApiService = inject(UserApiService);
   private LocalStoreService: LocalStoreService = inject(LocalStoreService);
-  private LoaderService: LoaderService = inject(LoaderService);
   private usersSubject: BehaviorSubject<IUser[]> = new BehaviorSubject<IUser[]>([]);
   readonly users$: Observable<IUser[]> = this.usersSubject.asObservable();
 
@@ -39,16 +36,8 @@ export class UserService {
   }
 
   loadUsers() {
-    this.LoaderService.showLoader();
     const storedUsers = this.LocalStoreService.get(localStorageKey) as IUser[] | null;
     const users$ = storedUsers ? of(storedUsers) : this.UserApi.getUsers();
-    users$
-      .pipe(
-        tap((users: IUser[]) => this.setUsers(users)),
-        finalize(() => {
-          this.LoaderService.hideLoader();
-        }),
-      )
-      .subscribe();
+    users$.pipe(tap((users: IUser[]) => this.setUsers(users))).subscribe();
   }
 }

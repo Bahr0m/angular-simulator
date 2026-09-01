@@ -1,0 +1,44 @@
+<section class="posts">
+  <h2>Posts</h2>
+  <p-contextmenu #cm [model]="items" (onHide)="selectedProduct = null" />
+  <p-table
+    [value]="posts"
+    [contextMenu]="cm"
+    [(contextMenuSelection)]="selectedPost"
+    [paginator]="true"
+    [first]="first"
+    [rows]="rows"
+    [totalRecords]="total"
+    [rowsPerPageOptions]="[10, 20, 50]"
+    [lazy]="true"
+    (onLazyLoad)="onPageChange($event)"
+    [tableStyle]="{ 'min-width': '50rem' }"
+  >
+    <ng-template #header>
+      <tr>
+        <th>Title</th>
+        <th>Tags</th>
+        <th>Views</th>
+      </tr>
+    </ng-template>
+    <ng-template #body let-post>
+      <tr [pContextMenuRow]="post">
+        @if (loading) {
+          <td>
+            <p-skeleton width="100%" height="24px"></p-skeleton>
+          </td>
+          <td>
+            <p-skeleton width="70%" height="24px"></p-skeleton>
+          </td>
+          <td>
+            <p-skeleton width="40%" height="24px"></p-skeleton>
+          </td>
+        } @else {
+          <td>{{ post.title }}</td>
+          <td>{{ post.tags }}</td>
+          <td>{{ post.views }}</td>
+        }
+      </tr>
+    </ng-template>
+  </p-table>
+</section>

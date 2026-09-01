@@ -9,7 +9,7 @@ import Aura from '@primeuix/themes/aura';
 import { providePrimeNG } from 'primeng/config';
 import { routes } from './app.routes';
 import { catchErrorInterceptor } from './helpers/interceptors/catch-error.interceptor';
-import { loggerInterceptor } from './helpers/interceptors/logger.interceptor';
+import { loaderInterceptor } from './helpers/interceptors/loader.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -24,6 +24,6 @@ export const appConfig: ApplicationConfig = {
         },
       },
     }),
-    provideHttpClient(withInterceptors([loggerInterceptor, catchErrorInterceptor])),
+    provideHttpClient(withInterceptors([loaderInterceptor, catchErrorInterceptor])),
   ],
 };

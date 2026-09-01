@@ -10,7 +10,12 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/users/users.component').then((m) => m.UsersPage),
   },
   {
+    path: 'posts',
+    loadComponent: () => import('./features/posts/posts/posts.component').then((m) => m.PostsPage),
+  },
+  {
     path: '**',
-    loadComponent: () => import('./pages/not-found/not-found.component').then((m) => m.NotFoundPage),
+    loadComponent: () =>
+      import('./pages/not-found/not-found.component').then((m) => m.NotFoundPage),
   },
 ];
