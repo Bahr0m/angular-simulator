@@ -14,6 +14,7 @@ interface IPostsResponse {
 export class PostApiService {
   http = inject(HttpClient);
   baseUrl: string = 'https://dummyjson.com/posts';
+
   getPosts(limit: number, skip: number): Observable<IPostsResponse> {
     return this.http.get<IPostsResponse>(this.baseUrl, {
       params: {
@@ -33,5 +34,9 @@ export class PostApiService {
 
   updatePost(post: IPost): Observable<IPost> {
     return this.http.put<IPost>(`${this.baseUrl}/${post.id}`, post);
+  }
+
+  removePost(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.baseUrl}/${id}`);
   }
 }

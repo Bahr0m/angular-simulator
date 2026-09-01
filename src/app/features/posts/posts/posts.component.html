@@ -1,6 +1,6 @@
 <section class="posts">
   <h2>Posts</h2>
-  <p-contextmenu #cm [model]="items" (onHide)="selectedProduct = null" />
+  <p-contextmenu #cm [model]="menuItems" (onHide)="selectedPost = null" />
   <p-table
     [value]="posts"
     [contextMenu]="cm"

@@ -14,7 +14,7 @@ export class PostService {
     this.loading = true;
     this.PostApi.getPosts(limit, skip)
       .pipe(finalize(() => (this.loading = false)))
-      .subscribe(response => {
+      .subscribe((response) => {
         console.log('Fetched posts:', response.posts);
         this.posts = response.posts;
         this.total = response.total;
@@ -27,11 +27,12 @@ export class PostService {
   //   this.setPosts(updatedPosts);
   // }
 
-  // removePost(id: number) {
-  //   const posts = this.postsSubject.getValue();
-  //   const updatedPosts = posts.filter((post) => post.id !== id);
-  //   this.setPosts(updatedPosts);
-  // }
+  removePost(id: number) {
+    this.PostApi.removePost(id).subscribe(() => {
+      this.posts = this.posts.filter((post) => post.id !== id);
+      this.total--;
+    });
+  }
 
   // updatePost(updatedPost: IPost) {
   //   const posts = this.postsSubject.getValue();
