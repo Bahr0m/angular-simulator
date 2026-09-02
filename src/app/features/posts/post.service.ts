@@ -34,6 +34,15 @@ export class PostService {
     });
   }
 
+  getPostById(id: number): IPost {
+    let post: IPost | undefined;
+    this.PostApi.getPostById(id).subscribe((newPost) => {
+      console.log('Fetched post by ID:', newPost);
+      post = newPost;
+    });
+    return post!;
+  }
+
   // updatePost(updatedPost: IPost) {
   //   const posts = this.postsSubject.getValue();
   //   const updatedPosts = posts.map((post) => (post.id === updatedPost.id ? updatedPost : post));
