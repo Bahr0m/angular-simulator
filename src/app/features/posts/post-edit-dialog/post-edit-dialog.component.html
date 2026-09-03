@@ -1,1 +1,18 @@
-<p>post-edit-dialog works!</p>
+<form [formGroup]="editForm">
+  <div>
+    <label for="title">Title</label>
+    <input id="title" type="text" formControlName="title" />
+  </div>
+
+  <div>
+    <label for="tags">Tags</label>
+    <input id="tags" type="text" formControlName="tags" />
+  </div>
+
+  <div>
+    <label for="views">Views</label>
+    <input id="views" type="number" formControlName="views" />
+  </div>
+
+  <p-button icon="pi pi-save" (onClick)="savePost()" label="Save" />
+</form>

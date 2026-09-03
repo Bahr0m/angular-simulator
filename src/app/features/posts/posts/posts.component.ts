@@ -2,11 +2,12 @@ import { Component, inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MenuItem } from 'primeng/api';
 import { ContextMenuModule } from 'primeng/contextmenu';
-import { DynamicDialogModule } from 'primeng/dynamicdialog';
+import { DialogService, DynamicDialogModule } from 'primeng/dynamicdialog';
 import { PaginatorModule } from 'primeng/paginator';
 import { SkeletonModule } from 'primeng/skeleton';
 import { TableLazyLoadEvent, TableModule } from 'primeng/table';
 import { IPost } from '../post';
+import { PostEditDialogComponent } from '../post-edit-dialog/post-edit-dialog.component';
 import { PostService } from '../post.service';
 
 @Component({
@@ -17,6 +18,7 @@ import { PostService } from '../post.service';
 })
 export class PostsPage implements OnInit {
   private postService: PostService = inject(PostService);
+  private dialogService = inject(DialogService);
   private router = inject(Router);
   rows: number = 10;
   first: number = 0;
@@ -72,7 +74,13 @@ export class PostsPage implements OnInit {
 
   openEditDialog() {
     if (this.selectedPost) {
-      this.router.navigate(['/posts', this.selectedPost.id, 'edit']);
+      this.dialogService.open(PostEditDialogComponent, {
+        header: 'Edit Post',
+        width: '50%',
+        data: {
+          post: this.selectedPost,
+        },
+      });
     }
   }
 }

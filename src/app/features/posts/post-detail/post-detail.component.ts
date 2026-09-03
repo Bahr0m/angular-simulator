@@ -10,12 +10,12 @@ import { IPost } from '../post';
 })
 export class PostDetailComponent implements OnInit {
   private activatedRoute = inject(ActivatedRoute);
-  currentPost: IPost | undefined;
+  post!: IPost;
 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe((data) => {
       console.log('Post data from resolver:', data['post']);
-      this.currentPost = data['post'];
+      this.post = data['post'];
     });
   }
 }

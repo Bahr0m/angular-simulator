@@ -2,17 +2,19 @@ import { inject, Service } from '@angular/core';
 import { finalize } from 'rxjs';
 import { IPost } from './post';
 import { PostApiService } from './post-api.service';
+import { MessageService } from '../../services/message/message.service';
 
 @Service()
 export class PostService {
-  private PostApi: PostApiService = inject(PostApiService);
+  private postApi: PostApiService = inject(PostApiService);
+  private messageService = inject(MessageService);
   posts: IPost[] = [];
   total: number = 0;
   loading: boolean = false;
 
   getPosts(limit: number, skip: number): void {
     this.loading = true;
-    this.PostApi.getPosts(limit, skip)
+    this.postApi.getPosts(limit, skip)
       .pipe(finalize(() => (this.loading = false)))
       .subscribe((response) => {
         console.log('Fetched posts:', response.posts);
@@ -21,14 +23,23 @@ export class PostService {
       });
   }
 
-  // addPost(newPost: IPost) {
-  //   const posts = this.postsSubject.getValue();
-  //   const updatedPosts = [...posts, newPost];
-  //   this.setPosts(updatedPosts);
-  // }
+  createPost(newPost: IPost) {
+    this.postApi.addPost(newPost).subscribe({
+      next: () => {
+        this.messageService.showSuccess('Пост успешно создан.');
+        this.posts.push(newPost);
+        this.total++;
+      },
+      error: (error) => {
+        if (error.status < 500) {
+          this.messageService.showError('Не удалось создать пост.');
+        }
+      },
+    });
+  }
 
   removePost(id: number) {
-    this.PostApi.removePost(id).subscribe(() => {
+    this.postApi.removePost(id).subscribe(() => {
       this.posts = this.posts.filter((post) => post.id !== id);
       this.total--;
     });
@@ -36,16 +47,26 @@ export class PostService {
 
   getPostById(id: number): IPost {
     let post: IPost | undefined;
-    this.PostApi.getPostById(id).subscribe((newPost) => {
+    this.postApi.getPostById(id).subscribe((newPost) => {
       console.log('Fetched post by ID:', newPost);
       post = newPost;
     });
     return post!;
   }
 
-  // updatePost(updatedPost: IPost) {
-  //   const posts = this.postsSubject.getValue();
-  //   const updatedPosts = posts.map((post) => (post.id === updatedPost.id ? updatedPost : post));
-  //   this.setPosts(updatedPosts);
-  // }
+  updatePost(updatedPost: IPost) {
+    this.postApi.updatePost(updatedPost).subscribe({
+      next: (updatedPost) => {
+        this.messageService.showSuccess('Post updated successfully');
+        this.posts = this.posts.map((post) =>
+          post.id === updatedPost.id ? updatedPost : post
+        );
+        return updatedPost;
+      },
+      error: (error) => {
+        console.error('Error updating post:', error);
+        this.messageService.showError('Failed to update post');
+      },
+    });
+  }
 }
